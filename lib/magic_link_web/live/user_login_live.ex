@@ -29,9 +29,6 @@ defmodule MagicLinkWeb.UserLoginLive do
           <.button phx-disable-with="Signing in..." class="w-full">
             Sign in <span aria-hidden="true">→</span>
           </.button>
-          <.button type="button" class="w-full">
-            Sign in <span aria-hidden="true">→</span>
-          </.button>
         </:actions>
       </.simple_form>
     </div>
