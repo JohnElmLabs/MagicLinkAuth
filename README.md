@@ -19,6 +19,6 @@ To demonstrate the sign-in flow:
 2. Log out of the account (Sign out button at top right of home page)
 3. Navigate to [http://localhost:4000/users/log_in](http://localhost:4000/users/log_in)
 4. Enter email and click "Send me a link"
-5. Navigate to the mailbox [http://localhost:4000/dev/mailbox](http://localhost:4000/dev/mailbox)
-6. Copy and paste the magic sign in URL
+5. Navigate to the mailbox [http://localhost:4000/dev/mailbox](http://localhost:4000/dev/mailbox) and find the magic link email
+6. Navigate to the sign in URL contained in the email
 7. Done!
