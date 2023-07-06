@@ -175,6 +175,17 @@ defmodule MagicLink.Accounts do
   end
 
   @doc """
+  Delivers a "magic" sign in link to a user's email
+  """
+  def deliver_magic_link(user) do
+    {email_token, token} = UserToken.build_email_token(user, "magic_link")
+    Repo.insert!(token)
+
+    url = "#{MagicLinkWeb.Endpoint.url()}/users/log_in/#{email_token}"
+    UserNotifier.deliver_magic_link(user, url)
+  end
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for changing the user password.
 
   ## Examples
@@ -321,6 +332,15 @@ defmodule MagicLink.Accounts do
   """
   def get_user_by_reset_password_token(token) do
     with {:ok, query} <- UserToken.verify_email_token_query(token, "reset_password"),
+         %User{} = user <- Repo.one(query) do
+      user
+    else
+      _ -> nil
+    end
+  end
+
+  def get_user_by_email_token(token, context) do
+    with {:ok, query} <- UserToken.verify_email_token_query(token, context),
          %User{} = user <- Repo.one(query) do
       user
     else

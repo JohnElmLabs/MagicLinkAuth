@@ -49,7 +49,6 @@ defmodule MagicLinkWeb.Router do
 
   scope "/", MagicLinkWeb do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
-    get "/users/log_in/:token", UserSessionController, :create
 
     live_session :redirect_if_user_is_authenticated,
       on_mount: [{MagicLinkWeb.UserAuth, :redirect_if_user_is_authenticated}] do
@@ -60,6 +59,7 @@ defmodule MagicLinkWeb.Router do
     end
 
     post "/users/log_in", UserSessionController, :create
+    get "/users/log_in/:token", UserSessionController, :create
   end
 
   scope "/", MagicLinkWeb do

@@ -77,7 +77,7 @@ defmodule MagicLink.Accounts.UserNotifier do
     """)
   end
 
-  def deliver_sign_in_link(user, url) do
+  def deliver_magic_link(user, url) do
     deliver(user.email, "Sign in to MagicLink", """
 
     ==============================

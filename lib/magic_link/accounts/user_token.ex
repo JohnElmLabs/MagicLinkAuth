@@ -9,6 +9,9 @@ defmodule MagicLink.Accounts.UserToken do
   # It is very important to keep the reset password token expiry short,
   # since someone with access to the email may take over the account.
   @reset_password_validity_in_days 1
+  # It is very important to keep the magic link token expiry short,
+  # since someone with access to the email may take over the account.
+  @magic_link_validity_in_days 1
   @confirm_validity_in_days 7
   @change_email_validity_in_days 7
   @session_validity_in_days 60
@@ -128,6 +131,7 @@ defmodule MagicLink.Accounts.UserToken do
 
   defp days_for_context("confirm"), do: @confirm_validity_in_days
   defp days_for_context("reset_password"), do: @reset_password_validity_in_days
+  defp days_for_context("magic_link"), do: @magic_link_validity_in_days
 
   @doc """
   Checks if the token is valid and returns its underlying lookup query.
