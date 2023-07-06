@@ -31,9 +31,11 @@ defmodule MagicLinkWeb.UserLoginLive do
           </.button>
         </:actions>
       </.simple_form>
+
       <div class="flex justify-center mt-8">
         <div class="align-center">OR</div>
       </div>
+
       <.simple_form for={@form} id="magic_link_form" action={~p"/users/log_in?_action=magic_link"} phx-update="ignore" class="my-0 py-0">
         <.input field={@form[:email]} type="email" label="Email" required />
         <:actions>
