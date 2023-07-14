@@ -177,12 +177,11 @@ defmodule MagicLink.Accounts do
   @doc """
   Delivers a "magic" sign in link to a user's email
   """
-  def deliver_magic_link(user) do
+  def deliver_magic_link(user, magic_link_url_fun) do
     {email_token, token} = UserToken.build_email_token(user, "magic_link")
     Repo.insert!(token)
 
-    url = "#{MagicLinkWeb.Endpoint.url()}/users/log_in/#{email_token}"
-    UserNotifier.deliver_magic_link(user, url)
+    UserNotifier.deliver_magic_link(user, magic_link_url_fun.(email_token))
   end
 
   @doc """

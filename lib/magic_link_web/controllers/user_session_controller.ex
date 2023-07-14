@@ -3,8 +3,6 @@ defmodule MagicLinkWeb.UserSessionController do
 
   alias MagicLink.Accounts
   alias MagicLink.Accounts.User
-  alias MagicLink.Accounts.UserToken
-  alias MagicLink.Accounts.UserNotifier
   alias MagicLinkWeb.UserAuth
 
   def create(conn, %{"_action" => "registered"} = params) do
@@ -20,8 +18,9 @@ defmodule MagicLinkWeb.UserSessionController do
   def create(conn, %{"_action" => "magic_link"} = params) do
     %{"user" => %{"email" => email}} = params
     if user = Accounts.get_user_by_email(email) do
+      magic_link_url_fun = &"#{MagicLinkWeb.Endpoint.url()}/users/log_in/#{&1}"
 
-      Accounts.deliver_magic_link(user)
+      Accounts.deliver_magic_link(user, magic_link_url_fun)
     end
 
     # In order to prevent user enumeration attacks, don't disclose whether the email is registered.
